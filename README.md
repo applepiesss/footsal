@@ -147,6 +147,16 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
         - Untuk membuat tombol "Detail" saya membuat file `product_detail.html` dan kode sebagai berikut di `main.html` pada direktori main/templates: `<a href="{% url 'main:show_product' product.id %}"><button>Detail</button></a>` 
 
     - **Membuat halaman form untuk menambahkan objek model pada app sebelumnya.**
+    Menuliskan kode berikut pada `forms.py` untuk membuat struktur form yang dapat menerima data product baru:
+    ```
+    from django.forms import ModelForm
+    from main.models import News
+
+    class NewsForm(ModelForm):
+        class Meta:
+            model = News
+            fields = ["title", "content", "category", "thumbnail", "is_featured"]
+    ```
     Button `Add` pada main.html tersebut akan mengarahkan ke create_product.html yang saya buat di direktori main/templates juga dengan kode:
         ```
         {% extends 'base.html' %} 
@@ -169,6 +179,8 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
         {% endblock %}
         ```
     pada kode diatas, `{{ form.as_table }}` adalah template tag yang digunakan untuk menampilkan fields form yang sudah di buat di `forms.py` sebagai table. Setelah itu saya melakukan routing untuk URLnya dengan menambahkan `path('create-product/', create_product, name='create_product'),` di `urlpatterns` pada `urls.py` 
+    Kemudian saya menambahkan kode `CSRF_TRUSTED_ORIGINS = [
+    "<https://nadia-aisyah-footsal.pbp.cs.ui.ac.id>"]` di `settings.py` 
 
     - **Membuat halaman yang menampilkan detail dari setiap data objek model.**
     Button `Detail` pada `main.html` akan mengarahkan ke `show_product.html` yang saya buat pada direktori main/templates juga dengan isi sebagai berikut:
