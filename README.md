@@ -150,34 +150,34 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
     Menuliskan kode berikut pada `forms.py` untuk membuat struktur form yang dapat menerima data product baru:
     ```
     from django.forms import ModelForm
-    from main.models import News
+    from main.models import Product
 
-    class NewsForm(ModelForm):
+    class ProductForm(ModelForm):
         class Meta:
-            model = News
-            fields = ["title", "content", "category", "thumbnail", "is_featured"]
+            model = Product
+            fields = ["name", "price", "description", "thumbnail", "category", "is_featured", "brand"]
     ```
-    Button `Add` pada main.html tersebut akan mengarahkan ke create_product.html yang saya buat di direktori main/templates juga dengan kode:
-        ```
-        {% extends 'base.html' %} 
-        {% block content %}
-        <h1>Add Product</h1>
+    Kemudian, button `Add` pada main.html tersebut akan mengarahkan ke create_product.html yang saya buat di direktori main/templates juga dengan kode:
+    ```
+    {% extends 'base.html' %} 
+    {% block content %}
+    <h1>Add Product</h1>
 
-        <form method="POST">
-            {% csrf_token %}
-            <table>
-                {{ form.as_table }}
-                <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="Add Product" />
-                </td>
-                </tr>
-            </table>
-        </form>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add Product" />
+            </td>
+            </tr>
+        </table>
+    </form>
 
-        {% endblock %}
-        ```
+    {% endblock %}
+    ```
     pada kode diatas, `{{ form.as_table }}` adalah template tag yang digunakan untuk menampilkan fields form yang sudah di buat di `forms.py` sebagai table. Setelah itu saya melakukan routing untuk URLnya dengan menambahkan `path('create-product/', create_product, name='create_product'),` di `urlpatterns` pada `urls.py` 
     Kemudian saya menambahkan kode `CSRF_TRUSTED_ORIGINS = [
     "<https://nadia-aisyah-footsal.pbp.cs.ui.ac.id>"]` di `settings.py` 
