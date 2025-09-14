@@ -77,3 +77,119 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
 6. **Apakah ada feedback untuk asisten dosen tutorial 1 yang telah kamu kerjakan sebelumnya?**
     - tidak ada feedback karena para asdos membantu dengan baik pada sesi tutorial.
+
+## Tugas 3
+1. **Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?**
+    Kita memerlukan data delivery dalam pengimplementasian sebuah platform supaya dapat mengirimkan data dari suatu stack ke stack lainnya dengan aman dan cepat, selain itu data delivery juga dapat membantu supaya tidak terjadi bottleneck ketika traffic sedang tinggi, dan untuk membantu menjaga konsistesi pada data.
+
+2. **Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?**
+    - Menurut saya, yang lebih baik adalah JSON karena lebih mudah dimengerti karena setiap elemennya mendeskripsikan dirinya sendiri.
+    - JSON lebih populer karena mudah dibaca dan banyak bahasa pemrograman yang mendukung untuk membaca dan membuat JSON, karena walaupun syntaxnya berasal dari objek javascript, namun JSON adalah format text.
+
+3. **Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?**
+    - Fungsi dari method `is_valid()` adalah untuk melakukan validasi apakah data yang dikirim memenuhi semua aturan validasi yang sudah ditentukan.
+    - Kita butuh method `is_valid()` supaya memiliki data yang lengkap dengan format yang benar agar tidak menyebabkan inkonsistensi data dan error.
+
+4. **Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?**
+    - Kita butuh `csrf_token` sebagai security untuk mencegah serangan berbahaya yang tidak diinginkan. 
+    - Dengan tidak menambahkan `csrf_token` pada form Django, kita tidak dapat memastikan apakah request yang masuk dari pengguna atau dari penyerang.
+    - Dengan tidak mengunakan `csrf_token`, penyerang dapat memaksa program untuk melakukan sesuatu atas nama pengguna.
+
+5. **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).**
+    - **Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.**
+    Dengan menambahkan function berikut pada `views.py` 
+    ```
+    def show_xml(request):
+        product_list = Product.objects.all()
+        xml_data = serializers.serialize("xml", product_list)
+        return HttpResponse(xml_data, content_type="application/xml")
+
+    def show_json(request):
+        product_list = Product.objects.all()
+        json_data = serializers.serialize("json", product_list)
+        return HttpResponse(json_data, content_type="application/json")
+
+    def show_xml_by_id(request, product_id):
+        try:
+            product_item = Product.objects.filter(pk=product_id)
+            xml_data = serializers.serialize("xml", product_item)
+            return HttpResponse(xml_data, content_type="application/xml")
+        except Product.DoesNotExist:
+            return HttpResponse(status=404)
+        
+    def show_json_by_id(request, product_id):
+        try:
+            product_item = Product.objects.get(pk=product_id)
+            json_data = serializers.serialize("json", [product_item])
+            return HttpResponse(json_data, content_type="application/json")
+        except Product.DoesNotExist:
+            return HttpResponse(status=404)
+    ```
+
+    - **Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 1.**
+    Dengan melakukan import keempat function tersebut: `from main.views import show_main, create_product, show_product, show_xml, show_json, show_xml_by_id, show_json_by_id` di `urls.py`, dan menambahkan routing sebagai berikut di urls.py juga pada `urlpatterns`:
+    ```
+    path('xml/', show_xml, name='show_xml'),
+    path('json/', show_json, name='show_json'),
+    path('xml/<str:product_id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<str:product_id>/', show_json_by_id, name='show_json_by_id'),
+    ```
+
+    - **Membuat halaman yang menampilkan data objek model yang memiliki tombol "Add" yang akan redirect ke halaman form, serta tombol "Detail" pada setiap data objek model yang akan menampilkan halaman detail objek.**
+        - Untuk membuat tombol "Add" saya membuat file `create_product.html` dan menambahkan kode sebagai berikut di `main.html` pada direktori main/templates:
+            ```
+            ...
+            <a href="{% url 'main:create_product' %}">
+                <button>Add</button>
+            </a>
+            ...
+            ```
+        - Untuk membuat tombol "Detail" saya membuat file `product_detail.html` dan kode sebagai berikut di `main.html` pada direktori main/templates: `<a href="{% url 'main:show_product' product.id %}"><button>Detail</button></a>` 
+
+    - **Membuat halaman form untuk menambahkan objek model pada app sebelumnya.**
+    Button `Add` pada main.html tersebut akan mengarahkan ke create_product.html yang saya buat di direktori main/templates juga dengan kode:
+        ```
+        {% extends 'base.html' %} 
+        {% block content %}
+        <h1>Add Product</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+                <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Add Product" />
+                </td>
+                </tr>
+            </table>
+        </form>
+
+        {% endblock %}
+        ```
+    pada kode diatas, `{{ form.as_table }}` adalah template tag yang digunakan untuk menampilkan fields form yang sudah di buat di `forms.py` sebagai table. Setelah itu saya melakukan routing untuk URLnya dengan menambahkan `path('create-product/', create_product, name='create_product'),` di `urlpatterns` pada `urls.py` 
+
+    - **Membuat halaman yang menampilkan detail dari setiap data objek model.**
+    Button `Detail` pada `main.html` akan mengarahkan ke `show_product.html` yang saya buat pada direktori main/templates juga dengan isi sebagai berikut:
+        ```
+        {% extends 'base.html' %}
+        {% block content %}
+        <p><a href="{% url 'main:show_main' %}"><button>← Back to Product List</button></a></p>
+
+        {% if product.thumbnail %}
+        <img src="{{ product.thumbnail }}" alt="Product thumbnail" width="300">
+        <br/><br />
+        {% endif %}
+
+        <h1>{{ product.name }}</h1>
+        <h3>{{ product.brand }}</h3>
+        <p>{{ product.description }}</p>
+        <p><b>Rp{{product.price}}</b></p> 
+
+        {% endblock content %}
+        ```
+        pada kode diatas, saya membuat tampilannya menjadi menampilkan detail tentang product dengan urutan thumbnail-name-brand-description-price (saya tidak menampilkan `category` dan `is_featured` karena saya ingin `category` dan `is_featured` hanya terlihat di main saja). Setelah itu saya melakukan routing untuk URLnya dengan menambahkan `path('product/<str:id>/', show_product, name='show_product'),` di `urlpatterns` pada `urls.py` 
+
+6. **Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?**
+    - tidak ada feedback karena para asdos membantu dengan baik pada sesi tutorial 2.
