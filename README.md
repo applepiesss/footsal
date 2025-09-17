@@ -205,3 +205,25 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
 6. **Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?**
     - tidak ada feedback karena para asdos membantu dengan baik pada sesi tutorial 2.
+
+## Tugas 4
+1.  **Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.**
+- Django AuthenticationForm adalah
+- Kelebihan: mudah untuk dipahami
+- Kekurangan: 
+
+
+2. **Apa perbedaan antara autentikasi dan otorisasi? Bagaiamana Django mengimplementasikan kedua konsep tersebut?**
+
+
+3. **Apa saja kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web?**
+
+
+4. **Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai? Bagaimana Django menangani hal tersebut?**
+
+
+5. **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).**
+    -  **Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna mengakses aplikasi sebelumnya sesuai dengan status login/logoutnya.**
+    - **Membuat dua (2) akun pengguna dengan masing-masing tiga (3) dummy data menggunakan model yang telah dibuat sebelumnya untuk setiap akun di lokal.**
+    - **Menghubungkan model Product dengan User.**
+    - **Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last_login pada halaman utama aplikasi.**
