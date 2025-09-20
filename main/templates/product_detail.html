@@ -1,21 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-<p><a href="{% url 'main:show_main' %}"><button>← Back to Product List</button></a></p>
+    <p><a href="{% url 'main:show_main' %}"><button>← Back to Product List</button></a></p>
 
-{% if product.thumbnail %}
-<img src="{{ product.thumbnail }}" alt="Product thumbnail" width="300">
-<br/><br />
-{% endif %}
+    {% if product.thumbnail %}
+        <img src="{{ product.thumbnail }}" alt="Product thumbnail" width="300">
+        <br/><br />
+    {% endif %}
 
-<h1>{{ product.name }}</h1>
-<h3>{{ product.brand }}</h3>
-<p>{{ product.description }}</p>
-<p><b>Rp{{product.price}}</b></p> 
+    <h1>{{ product.name }}</h1>
+    <h3>{{ product.brand }}</h3>
+    <p>{{ product.description }}</p>
 
-{% if product.user %}
-    <p>Seller: {{ product.user.username }}</p>
-{% else %}
-    <p>Seller: Anonymous</p>
-{% endif %}
+    {% if stock > 0%}
+        {% if product.discount == 0 %}
+            <p><b>Price:</b> Rp{{ product.formatted_price }}
+        {% else %}
+            <p><b>Price:</b> <del>Rp{{ product.formatted_price }}</del> Rp{{ product.formatted_price_after_disc }}
+        {% endif %}
+    {% endif %}
+
+    {% if product.user %}
+        <p><b>Seller</b>: {{ product.user.username }}</p>
+    {% else %}
+        <p><b>Seller</b>: Anonymous</p>
+    {% endif %}
 
 {% endblock content %}

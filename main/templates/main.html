@@ -13,6 +13,8 @@
 <a href="{% url 'main:logout' %}">
     <button>Logout</button>
 </a>
+
+<h5>Active user: {{ product.user.username }}</h5> <!-- TODO -->
 <h5>Sesi terakhir login: {{ last_login }}</h5>
 
 <a href="?filter=all">
@@ -38,10 +40,21 @@
             </a></h2>
             
             <p>
-                <b>{{ product.brand }}</b> | <b>{{product.get_category_display}}</b> {% if product.is_featured %} <b>| Hot ❤️‍🔥</b> {% endif %}
+                <b>{{ product.brand }}</b> 
+                | <b>{{ product.get_category_display }}</b> 
+                {% if product.is_featured %} <b>| Hot ❤️‍🔥</b> {% endif %} 
+                {% if product.stock > 0%}
+                    {% if product.discount > 0 %} | <b>Sale {{ product.discount }}%</b> {% endif %}
+                    {% if product.discount == 0 %}
+                        <p><b>Price:</b> Rp{{ product.formatted_price }}
+                    {% else %}
+                        <p><b>Price:</b> <del>Rp{{ product.formatted_price }}</del> Rp{{ product.formatted_price_after_disc }}
+                    {% endif %}
+                {% else %}
+                    <b>| Out of Stock</b>
+                {% endif %}
             </p>
-
-            <p><b>Price:</b> Rp{{product.price}}
+            
             <p>{{ product.description|truncatewords:200 }}</p>
 
             <a href="{% url 'main:show_product' product.id %}"><button>Detail</button></a>
