@@ -36,7 +36,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
         - title : Footsal.
         - name : Nadia Aisyah Fazila
         - class : PBP C
-        Fungsi tersebut memiliki `return render(request, "main.html", context)` untuk render tampilan dari main.html sesuai dengan context.
+        Fungsi tersebut memiliki `return render(request, "main.html", context)` untuk render tampilan dari `main.html` sesuai dengan context.
 
     -** Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py.**
         Saya membuat berkas `urls.py` di dalam direktori main dan mengisinya dengan:
@@ -52,7 +52,6 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
         ```
         untuk mengatur pola URL pada aplikasi main.
 
-
     - **Melakukan deployment ke PWS terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.**
         Dengan menambahkan URL `nadia-aisyah-footsal.pbp.cs.ui.ac.id` pada `ALLOWED_HOSTS` di `settings.py` pada direktori root proyek dan melakukan push ke PWS. 
 
@@ -67,7 +66,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
 4. **Bagaimana cara kerja migrasi database di Django?**
     - `makemigrations` melakukan perisapan untuk melakukan migrasi skema model ke dalam database Django lokal
-    - `migrasi` melakukan migrasi file dan menerapkan skema yang telah dibuat ke dalam database Django lokal
+    - `migrate` melakukan migrasi file dan menerapkan skema yang telah dibuat ke dalam database Django lokal
     - setiap melakukan perubahan pada `models.py` harus melakukan migrasi untuk merefleksikan perubahan tersebut.  
 
 5. **Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?**
@@ -157,7 +156,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
             model = Product
             fields = ["name", "price", "description", "thumbnail", "category", "is_featured", "brand"]
     ```
-    Kemudian, button `Add` pada main.html tersebut akan mengarahkan ke create_product.html yang saya buat di direktori main/templates juga dengan kode:
+    Kemudian, button `Add` pada `main.html` tersebut akan mengarahkan ke `create_product.html` yang saya buat di direktori main/templates juga dengan kode:
     ```
     {% extends 'base.html' %} 
     {% block content %}
@@ -183,7 +182,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
     "<https://nadia-aisyah-footsal.pbp.cs.ui.ac.id>"]` di `settings.py` 
 
     - **Membuat halaman yang menampilkan detail dari setiap data objek model.**
-    Button `Detail` pada `main.html` akan mengarahkan ke `show_product.html` yang saya buat pada direktori main/templates juga dengan isi sebagai berikut:
+    Button `Detail` pada `main.html` akan mengarahkan ke `show_product.html` yang saya buat pada direktori `main/templates` juga dengan isi sebagai berikut:
         ```
         {% extends 'base.html' %}
         {% block content %}
@@ -206,24 +205,82 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 6. **Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?**
     - tidak ada feedback karena para asdos membantu dengan baik pada sesi tutorial 2.
 
+7.  **Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.**
+    [https://drive.google.com/drive/folders/181KisZUXfCjDLfV0Zjzih9475pZjotzt?usp=share_link]
+
 ## Tugas 4
 1.  **Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.**
-- Django AuthenticationForm adalah
-- Kelebihan: mudah untuk dipahami
+- Django AuthenticationForm adalah form bawaan dari Django yang digunakan untuk melakuakan login yaitu untuk melakukan verifikasi username dan password, dan memanggil mekanisme autentikasi Django.
+- Kelebihan: 
+    - merupakan bagian resmi dari Django 
+    - fleksibel dan dirancang generik sehingga bisa diperluasi dan dikostumisasi 
+    - sederhana sehingga mudah dipahami
 - Kekurangan: 
+    - karena generic maka harus dikostumisasi sendiri sesuai kebutuhan yang bisa jadi merepotkan
+    - sederhana, jadi kurang cocok jika butuh sistem otentikasi yang lebih kompleks
 
 
 2. **Apa perbedaan antara autentikasi dan otorisasi? Bagaiamana Django mengimplementasikan kedua konsep tersebut?**
-
+    - **autentikasi:** memastikan siapa user 
+    - **otorisasi:** menentukan apa yang boleh dilakukan dan diakses oleh user
 
 3. **Apa saja kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web?**
-
+    - **session:**
+        - kelebihan:
+            - data disimpan di server sehingga lebih aman untuk data yang sensitif
+            - bertahan selama sesi masih aktif
+            - mendukung proses transaksi 
+        - kekurangan:
+            - session habis ketika browser ditutup
+    - **cookies**
+        - kelebihan:
+            - cookie tetap bertahan meskipun browser sudah ditutup
+        - kekurangan:
+            - lebih tidak aman dari session karena data di save di client
+            - ada isu privasi karena tracking data user
+            - menjadi celah keamanan pada website
+    - sebaiknya menggunakan session untuk data sensitif dan cookie untuk data non-sensitif 
 
 4. **Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai? Bagaimana Django menangani hal tersebut?**
-
+    - tidak sepenuhnya aman secara default karena ada risiko pencurian cookies.
+    - cara Django menangani:
+        - dengan menyimpan data di server, jadi ketika penyerang mencuri cookie user nama hanya mendapatkan session id bukan isi data. session id yang dihasilkan oleh Django juga acak dan susah ditebak.
+        - dengan CSRF token dari Django yang aktif secara default sebagai pencegahan terhadap situs berbahaya dan penyerang.
+        - dengan *user authentication* dimana Django selali mengganti secret key setiap user login untuk perlindungan tambahan terhadap serangan pada CSRF.
 
 5. **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).**
     -  **Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna mengakses aplikasi sebelumnya sesuai dengan status login/logoutnya.**
+        - fungsi registrasi:
+            dengan membuat function register() pada `views.py` untuk menghasilkan form registrasi secara otomatis. Kemudian membuat registration page `register.html`, selanjutnya melakukan routing di urls.py
+        - fungsi login:
+             dengan membuat function login_user() pada `views.py` untuk menghasilkan form login secara otomatis. Kemudian membuat login page `login.html`, selanjutnya melakukan routing di urls.py
+        - fungsi logout:
+            dengan membuat function logout_user() pada `views.py` kemudian menambahkan hyperlink di `main.html` untuk logout, dan melakukan routing di `urls.py`
+        - memungkinkan pengguna untuk mengakses aplikasi dengan status login dan logoutnya:
+            dengan menambahkan decorator `@login_required(login_url='/login')` untuk functions yang dapat diakses ketika pengguna sudah login, yaitu pada function `show_main()`, `create_product()` dan `show_product()` di `views.py`
+
     - **Membuat dua (2) akun pengguna dengan masing-masing tiga (3) dummy data menggunakan model yang telah dibuat sebelumnya untuk setiap akun di lokal.**
+    [https://drive.google.com/file/d/1kKpEZXBc0-ETiZNHQ-Oy_ZvD5U3lXR3g/view?usp=sharing]
+
     - **Menghubungkan model Product dengan User.**
+        dengan menambahkan `user = models.ForeignKey(User, on_delete=models.CASCADE, null=True` pada model Product yang sudah dibuat, kemudian melakukan migrate, dan menambahkan potongan code ini di `views.py` 
+        - pada `create_product()`
+            ```
+            news_entry = form.save(commit = False)
+            news_entry.user = request.user
+            ```
+        - pada `show_main()`
+            menambahkan filtering dengan default all dan product_list untuk product per user
+        kemudian, saya menambahkan button filter all products dan my products pada `main.html` selanjutnya saya menambahkan penampilan nama dari seller di `product_detail.html`
+
     - **Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last_login pada halaman utama aplikasi.**
+        - dengan menambahkan kode pada function `login_user()` untuk menyimpan cookie baru yang bernama last_login yang isinya adalah timestamp terakhir user melakukan login dan mengubah `form.is_valid()` pada `login_user()` di `views.py` menajadi:
+            ```
+            if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                response = HttpResponseRedirect(reverse("main:show_main"))
+                response.set_cookie('last_login', str(datetime.datetime.now()))
+                return response
+            ```
+        kemudian juga menambahkan `'user_username': request.user.username,` dan`'last_login': request.COOKIES.get('last_login', 'Never')` pada function `show_main()` di `views.py`. tambahan kode tersebut untuk menampilkan user yang sedang aktif dan terakhir kali user melakukan login. Selanjutnya, saya menambahkan kode ` response.delete_cookie('last_login')` pada logout_user() di `views.py` untuk menghapus cookie setelah logout.

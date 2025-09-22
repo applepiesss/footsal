@@ -1,64 +1,70 @@
-<h1>Footsal.</h1>
+{% extends 'base.html' %}
 
-<h5>Name:</h5>
-<p>{{ name }}</p>
+{% block content %}
+    <h1>Footsal.</h1>
 
-<h5>Class:</h5>
-<p>{{ class }}</p>
+    <h5>Name:</h5>
+    <p>{{ name }}</p>
 
-<a href="{% url 'main:create_product' %}">
-    <button>Add</button>
-</a>
+    <h5>Class:</h5>
+    <p>{{ class }}</p>
 
-<a href="{% url 'main:logout' %}">
-    <button>Logout</button>
-</a>
+    <hr>
 
-<h5>Active user: {{ product.user.username }}</h5> <!-- TODO -->
-<h5>Sesi terakhir login: {{ last_login }}</h5>
+    <a href="{% url 'main:logout' %}">
+        <button>Logout</button>
+    </a>
 
-<a href="?filter=all">
-    <button type="button">All Products</button>
-</a>
-<a href="?filter=my">
-    <button type="button">My Products</button>
-</a> 
+    <h5>Active user:</h5> <p> {{ user_username }}</p>
+    <h5>Sesi terakhir login:</h5> <p> {{ last_login }}</p>
 
-<hr>
-{% if not product_list %}
-    <p>No products available yet.</p>
-{% else %}
-    {% for product in product_list %}
-        <div>
-            {% if product.thumbnail %}
-                <img src="{{ product.thumbnail }}" alt="thumbnail" width="20%" height="auto%">
-                <br/>
-            {% endif %}
+    <a href="{% url 'main:create_product' %}">
+        <button>Add Product</button>
+    </a>
 
-            <h2><a href="{% url 'main:show_product' product.id %}">
-                {{ product.name }}
-            </a></h2>
-            
-            <p>
-                <b>{{ product.brand }}</b> 
-                | <b>{{ product.get_category_display }}</b> 
-                {% if product.is_featured %} <b>| Hot ❤️‍🔥</b> {% endif %} 
-                {% if product.stock > 0%}
-                    {% if product.discount > 0 %} | <b>Sale {{ product.discount }}%</b> {% endif %}
-                    {% if product.discount == 0 %}
-                        <p><b>Price:</b> Rp{{ product.formatted_price }}
-                    {% else %}
-                        <p><b>Price:</b> <del>Rp{{ product.formatted_price }}</del> Rp{{ product.formatted_price_after_disc }}
-                    {% endif %}
-                {% else %}
-                    <b>| Out of Stock</b>
+    <a href="?filter=all">
+        <button type="button">All Products</button>
+    </a>
+    <a href="?filter=my">
+        <button type="button">My Products</button>
+    </a> 
+
+    <hr>
+    {% if not product_list %}
+        <p>No products available yet.</p>
+    {% else %}
+        {% for product in product_list %}
+            <div>
+                {% if product.thumbnail %}
+                    <img src="{{ product.thumbnail }}" alt="thumbnail" width="20%" height="auto%">
+                    <br/>
                 {% endif %}
-            </p>
-            
-            <p>{{ product.description|truncatewords:200 }}</p>
 
-            <a href="{% url 'main:show_product' product.id %}"><button>Detail</button></a>
-        </div>
-        <hr>
-    {% endfor %}
-{% endif %}
+                <h2><a href="{% url 'main:show_product' product.id %}">
+                    {{ product.name }}
+                </a></h2>
+                
+                <p>
+                    <b>{{ product.brand }}</b> 
+                    | <b>{{ product.get_category_display }}</b> 
+                    {% if product.is_featured %} <b>| Hot ❤️‍🔥</b> {% endif %} 
+                    {% if product.stock > 0%}
+                        {% if product.discount > 0 %} | <b>Sale {{ product.discount }}%</b> {% endif %}
+                        {% if product.discount == 0 %}
+                            <p><b>Price:</b> Rp{{ product.formatted_price }}
+                        {% else %}
+                            <p><b>Price:</b> <del>Rp{{ product.formatted_price }}</del> Rp{{ product.formatted_price_after_disc }}
+                        {% endif %}
+                    {% else %}
+                        <b>| Out of Stock</b>
+                    {% endif %}
+                </p>
+                
+                <p>{{ product.description|truncatewords:200 }}</p>
+
+                <a href="{% url 'main:show_product' product.id %}"><button>Detail</button></a>
+            </div>
+            <hr>
+        {% endfor %}
+    {% endif %}
+{% endblock content %}

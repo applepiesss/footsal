@@ -25,21 +25,26 @@ def show_main(request):
         'name': 'Nadia Aisyah Fazila',
         'class': 'PBP C',
         'product_list': product_list,
+        'user_username': request.user.username,
         'last_login': request.COOKIES.get('last_login', 'Never')
     }
 
     return render(request, "main.html", context)
 
+@login_required(login_url='/login')
 def create_product(request):
     form = ProductForm(request.POST or None)
 
-    if form.is_valid() and request.method == "POST":
+    if form.is_valid() and request.method == 'POST':
         product_entry = form.save(commit = False)
         product_entry.user = request.user
         product_entry.save()
         return redirect('main:show_main')
 
-    context = {'form': form}
+    context = {
+        'form': form
+    }
+
     return render(request, "create_product.html", context)
 
 @login_required(login_url='/login')
