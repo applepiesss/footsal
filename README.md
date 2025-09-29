@@ -287,17 +287,42 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
 ## Tugas 5
 1. **Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!**
-    - Prioritas 1:
-    - Priotitas 2:
-    - Priotitas 3:
+    - Mulai dari prioritas tertinggi:
+        - Prioritas 1: inline styles. Contoh: `<p style="color:pink;">`
+        - Prioritas 2: id selectors. Contoh: `#navbar`
+        - Prioritas 3: classes, attribute selectors, dan pseudo-classes. Contoh: `.product`
+        - Prioritas 4: elements dan pseudo-elements. Contoh: `p {color: pink;}`
+        - Prioritas 5: universal selector. Contoh: `* {color:pink;}`
+    - Jika ada dua selector yang sama maka ambil yang paling akhir. Contoh: `p {color:black;} p{color:pink;}` maka akan mengambil yang pink.
 
 2. **Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa!**
-    - Karena 
+    - Karena responsive web design memberikan *user experience* yang konsisten di semua perangkat dengan menyesuaikan layout website sesuai dengan berbagai ukuran layar sehingga aksesibel di berbagai perangkat.
+    - Contoh:
+        - Sudah menerapkan: Shopee
+        - Belum menerapkan:
+    - Alasan penerapan responsive web design adalah supaya *user experience* optimal pada perangkat apapun.
 
 3. **Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!**
-    - Margin:
-    - Border:
-    - Padding:
+    - Margin: mengosongkan area di sekitar border (transparan). Cara implementasi adalah dengan `margin: ukuran yang diinginkan`. Contoh:
+    ```
+    p {
+        margin: 10px; 
+        margin-top: 5px;
+        margin-botton: 5px;
+    }
+    ```
+    - Border: garis tepian yang membungkus konten dan paddingnya. Cara implementasi adalah dengan `border: ukuran yang diinginkan`. Contoh:
+    ```
+    p {
+        border: 3px double black; 
+    }
+    ```
+    - Padding: mengosongkan area sekitar konten (transparan). Cara implementasi adalah dengan `padding: ukuran yang diinginkan` Contoh:
+    ```
+    p {
+        padding: 10px; 
+    }
+    ```
 
 4. **Jelaskan konsep flex box dan grid layout beserta kegunaannya!**
     - Flex box:

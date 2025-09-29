@@ -38,17 +38,17 @@
                 
                 <!-- Brand -->
                 <div class="flex flex-wrap items-center text-sm text-500 gap-4">
-                    <h2>{{ product.brand }}</h2>
+                    <h2><b>{{ product.brand }}</b></h2>
                 </div>
             </div>
             
 
             <!-- Featured Image -->
             {% if product.thumbnail %}
-                <div class="px-6 sm:px-8">
+                <div class="aspect-[5/3] relative overflow-hidden">
                     <img src="{{ product.thumbnail }}" 
                         alt="{{ product.name }}" 
-                        class="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-lg">
+                        class="w-full h-full object-cover rounded-lg">
                 </div>
             {% endif %}
 
@@ -70,7 +70,7 @@
                             <p><b>Price:</b> <del>Rp{{ product.formatted_price }}</del> Rp{{ product.formatted_price_after_disc }}
                         {% endif %}
                     {% else %}
-                        <b>Out of Stock</b>
+                        <b style="color:red;">Out of Stock</b>
                     {% endif %}
             </div>
 
