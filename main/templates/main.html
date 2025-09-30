@@ -7,7 +7,7 @@
 
 {% block content %}
 {% include 'navbar.html' %}
-<div class="bg-gray-50 w-full pt-16 min-h-screen">
+<div class="bg-[#FAF6EF] w-full pt-16 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <!-- Header Section -->
@@ -17,17 +17,17 @@
         </div>
 
         <!-- Filter Section -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 bg-white rounded-lg border border-gray-200 p-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 bg-[#75070C] rounded-lg border border-white-200 p-4">
         <div class="flex space-x-3 mb-4 sm:mb-0">
-            <a href="?" class="{% if request.GET.filter == 'all' or not request.GET.filter  %} bg-pink-600 text-white{% else %}bg-white text-gray-700 border border-gray-300{% endif %} px-4 py-2 rounded-md font-medium transition-colors hover:bg-pink-600 hover:text-white">
+            <a href="?" class="{% if request.GET.filter == 'all' or not request.GET.filter  %} bg-[#A63636] text-white border border-white-200{% else %}bg-[#F0E6DA] text-black-200 border border-white-300{% endif %} px-4 py-2 rounded-md font-medium transition-colors hover:bg-[#A63636] hover:text-white">
             All Product
             </a>
-            <a href="?filter=my" class="{% if request.GET.filter == 'my' %} bg-pink-600 text-white{% else %}bg-white text-gray-700 border border-gray-300{% endif %} px-4 py-2 rounded-md font-medium transition-colors hover:bg-pink-600 hover:text-white">
+            <a href="?filter=my" class="{% if request.GET.filter == 'my' %} bg-[#A63636] text-white border border-white-200{% else %}bg-[#F0E6DA] text-black-200 border border-white-300{% endif %} px-4 py-2 rounded-md font-medium transition-colors hover:bg-[#A63636] hover:text-white">
             My Product
             </a>
         </div>
         {% if user.is_authenticated %}
-            <div class="text-sm text-gray-500">
+            <div class="text-sm text-[#F0E6DA]">
             Last login: {{ last_login }}
             </div>
         {% endif %}
@@ -35,13 +35,13 @@
 
         <!-- Product Grid -->
         {% if not product_list %}
-        <div class="bg-white rounded-lg border border-gray-200 p-12 text-center">
+        <div class="bg-[#F0E6DA] rounded-lg border border-gray-200 p-12 text-center">
             <div class="w-32 h-32 mx-auto mb-4">
             <img src="{% static 'image/no-product.png' %}" alt="No products available" class="w-full h-full object-contain">
             </div>
             <h3 class="text-lg font-medium text-gray-900 mb-2">No product found</h3>
             <p class="text-gray-500 mb-6">Be the first to sell football product with the community.</p>
-            <a href="{% url 'main:create_product' %}" class="inline-flex items-center px-4 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 transition-colors">
+            <a href="{% url 'main:create_product' %}" class="inline-flex items-center px-4 py-2 bg-[#4F6815] text-white rounded-md hover:bg-[#5F7B1F] transition-colors">
             Create Product
             </a>
         </div>

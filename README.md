@@ -298,8 +298,8 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 2. **Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa!**
     - Karena responsive web design memberikan *user experience* yang konsisten di semua perangkat dengan menyesuaikan layout website sesuai dengan berbagai ukuran layar sehingga aksesibel di berbagai perangkat.
     - Contoh:
-        - Sudah menerapkan: Shopee
-        - Belum menerapkan:
+        - Sudah menerapkan: Tokopedia
+        - Belum menerapkan: Pacil Web Service 
     - Alasan penerapan responsive web design adalah supaya *user experience* optimal pada perangkat apapun.
 
 3. **Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!**
@@ -341,5 +341,4 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
         - **Untuk setiap card product, buatlah dua buah button untuk mengedit dan menghapus product pada card tersebut!**
         
-        - **Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop.
-        Contoh dari navbar yang responsive (Tidak perlu sama persis!):**
+        - **Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop.**
