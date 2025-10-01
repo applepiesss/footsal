@@ -325,20 +325,199 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
     ```
 
 4. **Jelaskan konsep flex box dan grid layout beserta kegunaannya!**
-    - Flex box:
-    - Grid layout:
+    - Flex box: metode satu dimensi untuk mengatur elemen row dan column.
+        - Kegunaan: membantu untuk membuat design dengan flexibel tanpa float dan position serta memudahkan perataan elemen.
+    - Grid layout: metode layout dua dimensi untuk mengtur rows dan columns secara bersamaan. Biasanya digunakan untuk membuat layout halaman yang lebih complex.
+        - Kegunaan: membantu untuk membuat design yang complex dengan menyusun elemen dengan kontrol penuh terhadap posisi dan ukuran dari elemen.
 
 5. **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!**
     - **Implementasikan fungsi untuk menghapus dan mengedit product.**
+        dengan membuat dua fungsi berikut pada `views.py` 
+        ```
+        def edit_product(request, id):
+            product = get_object_or_404(Product, pk=id)
+            form = ProductForm(request.POST or None, instance=product)
+            if form.is_valid() and request.method == 'POST':
+                form.save()
+                return redirect('main:show_main')
+
+            context = {
+                'form': form
+            }
+
+            return render(request, "edit_product.html", context)
+
+        def delete_product(request, id):
+            product = get_object_or_404(Product, pk=id)
+            product.delete()
+            return HttpResponseRedirect(reverse('main:show_main'))
+        ```
+        Selanjutnya saya melakukan routing dengan melakukan import sebagai berikut `from main.views import edit_product, delete_product` dan menambahkan path sebagai berikut pada `urlpatterns` di `urls.py`
+        ```
+        path('product/<int:id>/edit', edit_product, name='edit_product'),
+        path('product/<int:id>/delete', delete_product, name='delete_product'),
+        ```
 
     - **Kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya menggunakan CSS atau CSS framework (seperti Bootstrap, Tailwind, Bulma) dengan ketentuan sebagai berikut:**
         - **Kustomisasi halaman login, register, tambah product, edit product, dan detail product semenarik mungkin.**
+            - Dengan mengganti ukuran dan warna dengan *color palette* sebagai berikut :
+                - cherry [#75070C]
+                - dusty red [#A63636]
+                - olive [#4F6815]
+                - moss [#5F7B1F]
+                - beige [#CBB4AB]
+                - oat [#F0E6DA]
+                - pearl [#FAF6EF]
 
         - **Kustomisasi halaman daftar product menjadi lebih menarik dan responsive. Kemudian, perhatikan kondisi berikut:**
             - **Jika pada aplikasi belum ada product yang tersimpan, halaman daftar product akan menampilkan gambar dan pesan bahwa belum ada product yang terdaftar.**
-
+                dengan menambahkan `no-product.png` di direktori `static/image` potongan code berikut pada main:
+                ```
+                ...
+                {% if not product_list %}
+                <div class="bg-[#F0E6DA] rounded-lg border border-gray-200 p-12 text-center">
+                    <div class="w-32 h-32 mx-auto mb-4">
+                    <img src="{% static 'image/no-product.png' %}" alt="No products available" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">No product found</h3>
+                    <p class="text-gray-500 mb-6">Be the first to sell football product with the community.</p>
+                    <a href="{% url 'main:create_product' %}" class="inline-flex items-center px-4 py-2 bg-[#4F6815] text-white rounded-md hover:bg-[#5F7B1F] transition-colors">
+                    Create Product
+                    </a>
+                </div>
+                ...
+                ```
             - **Jika sudah ada product yang tersimpan, halaman daftar product akan menampilkan detail setiap product dengan menggunakan card (tidak boleh sama persis dengan desain pada Tutorial!).**
+                - dengan membuat file `card_product.html` di direktori `main/templates ` kemudian melakukan styling pada card di file tersebut. Design saya: [https://drive.google.com/drive/folders/1uBxHVdLwX544zmJ806-afdc2f-tVbDeC?usp=share_link]
 
         - **Untuk setiap card product, buatlah dua buah button untuk mengedit dan menghapus product pada card tersebut!**
+            - dengan menambahkan potongan kode dibawah pada `card_product.html`
+            ```
+            <!-- Action Buttons -->
+            {% if user.is_authenticated and product.user == user %}
+            <div class="flex items-center justify-between pt-4 border-t border-[#FAF6EF]">
+                <a href="{% url 'main:show_product' product.id %}" class="text-[#4F6815] hover:text-white font-medium text-sm transition-colors">
+                    Details
+                </a>
+                <div class="flex space-x-2">
+                <a href="{% url 'main:edit_product' product.id %}" class="text-black hover:text-white text-sm transition-colors">
+                    Edit
+                </a>
+                <a href="{% url 'main:delete_product' product.id %}" class="text-[#75070C] hover:text-white text-sm transition-colors">
+                    Delete
+                </a>
+                </div>
+            </div>
+            {% else %}
+            <div class="pt-4 border-t border-gray-100">
+                <a href="{% url 'main:show_product' product.id %}" class="text-[#75070C] hover:text-white font-medium text-sm transition-colors">
+                Details
+                </a>
+            </div>
+            {% endif %}
+            ```
         
         - **Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop.**
+            - dengan membuat file `navbar.html` pada direktori `main/templates` kemudian menautkan navbar tersebut ke `main.html` dengan `{% include 'navbar.html' %}` di dalam `{% block content %} ... {% endblock content%}`. Untuk membuat navbar tersebut jadi responsive maka mengatur dengan 
+            - untuk desktop:
+                ```
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                <a href="/" class="text-[#F0E6DA] hover:text-white font-medium transition-colors">
+                    Home
+                </a>
+                <a href="?filter=my" class="text-[#F0E6DA] hover:text-white font-medium transition-colors">
+                    My Products
+                </a>
+                <a href="{% url 'main:create_product' %}" class="text-[#F0E6DA] hover:text-white font-medium transition-colors">
+                    Create Product
+                </a>
+                </div>
+                
+                <!-- Desktop User Section -->
+                <div class="hidden md:flex items-center space-x-6">
+                {% if user.is_authenticated %}
+                    <div class="text-right">
+                    <div class="text-sm font-medium text-[#CBB4AB]">{{ user_username|default:user.username }}</div>
+                    <div class="text-xs text-[#F0E6DA]">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
+                    </div>
+                    <a href="{% url 'main:logout' %}" class="bg-[#F0E6DA] text-[#75070C] font-medium transition-colors px-4 py-2 rounded-md font-medium transition-colors  hover:text-white">
+                    <b>Logout</b>
+                    </a>
+                {% else %}
+                    <a href="{% url 'main:login' %}" class="text-gray-600 hover:text-white font-medium transition-colors">
+                    Login
+                    </a>
+                    <a href="{% url 'main:register' %}" class="bg-pink-600 hover:text-white text-white px-4 py-2 rounded font-medium transition-colors">
+                    Register
+                    </a>
+                {% endif %}
+                </div>
+                ```
+            - untuk mobile:
+                ```
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                <button class="mobile-menu-button p-2 text-[#F0E6DA] hover:text-white transition-colors">
+                    <span class="sr-only">Open menu</span>
+                    <div class="w-6 h-6 flex flex-col justify-center items-center">
+                    <span class="bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm"></span>
+                    <span class="bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5"></span>
+                    <span class="bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm"></span>
+                    </div>
+                </button>
+                </div>
+            <!-- Mobile Menu -->
+            <div class="mobile-menu hidden md:hidden bg-[#A63636] border-t border-gray-200">
+            <div class="px-6 py-4 space-y-4">
+                <!-- Mobile Navigation Links -->
+                <div class="space-y-1">
+                <a href="/" class="block text-[#F0E6DA] hover:text-white font-medium py-3 transition-colors">
+                    Home
+                </a>
+                <a href="?filter=my" class="block text-[#F0E6DA] hover:text-white font-medium py-3 transition-colors">
+                    My Products
+                </a>
+                <a href="{% url 'main:create_product' %}" class="block text-[#F0E6DA] hover:text-white font-medium py-3 transition-colors">
+                    Create Product
+                </a>
+                </div>
+                
+                <!-- Mobile User Section -->
+                <div class="border-t border-gray-200 pt-4">
+                {% if user.is_authenticated %}
+                    <div class="mb-4">
+                    <div class="font-medium text-[#CBB4AB]">{{ user_username|default:user.username }}</div>
+                    <div class="text-sm text-[#F0E6DA]">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4">
+                        <a href="{% url 'main:logout' %}" class="bg-[#75070C] text-[#F0E6DA] font-medium transition-colors px-4 py-2 rounded-md font-medium transition-colors  hover:text-white">
+                        <b>Logout</b>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="space-y-3">
+                    <a href="{% url 'main:login' %}" class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
+                        Login
+                    </a>
+                    <a href="{% url 'main:register' %}" class="block bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 px-4 rounded text-center transition-colors">
+                        Register
+                    </a>
+                    </div>
+                {% endif %}
+                </div>
+            ```
+        - untuk menampilkan hamburger:
+            ```
+            <script>
+                const btn = document.querySelector("button.mobile-menu-button");
+                const menu = document.querySelector(".mobile-menu");
+                
+                btn.addEventListener("click", () => {
+                    menu.classList.toggle("hidden");
+                });
+            </script>
+            ```
+        - Perubahan yang saya lakukan pada navbar adalah menambahkan `My Products` yang menampilan product yang dibuat oleh user yang sedang login.
+        - Tampilan navbar yang saya buat: [https://drive.google.com/drive/folders/1uBxHVdLwX544zmJ806-afdc2f-tVbDeC?usp=share_link]
+
