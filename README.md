@@ -467,44 +467,44 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
                     </div>
                 </button>
                 </div>
-            <!-- Mobile Menu -->
-            <div class="mobile-menu hidden md:hidden bg-[#A63636] border-t border-gray-200">
-            <div class="px-6 py-4 space-y-4">
-                <!-- Mobile Navigation Links -->
-                <div class="space-y-1">
-                <a href="/" class="block text-[#F0E6DA] hover:text-white font-medium py-3 transition-colors">
-                    Home
-                </a>
-                <a href="?filter=my" class="block text-[#F0E6DA] hover:text-white font-medium py-3 transition-colors">
-                    My Products
-                </a>
-                <a href="{% url 'main:create_product' %}" class="block text-[#F0E6DA] hover:text-white font-medium py-3 transition-colors">
-                    Create Product
-                </a>
-                </div>
-                
-                <!-- Mobile User Section -->
-                <div class="border-t border-gray-200 pt-4">
-                {% if user.is_authenticated %}
-                    <div class="mb-4">
-                    <div class="font-medium text-[#CBB4AB]">{{ user_username|default:user.username }}</div>
-                    <div class="text-sm text-[#F0E6DA]">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
+                <!-- Mobile Menu -->
+                <div class="mobile-menu hidden md:hidden bg-[#A63636] border-t border-gray-200">
+                <div class="px-6 py-4 space-y-4">
+                    <!-- Mobile Navigation Links -->
+                    <div class="space-y-1">
+                    <a href="/" class="block text-[#F0E6DA] hover:text-white font-medium py-3 transition-colors">
+                        Home
+                    </a>
+                    <a href="?filter=my" class="block text-[#F0E6DA] hover:text-white font-medium py-3 transition-colors">
+                        My Products
+                    </a>
+                    <a href="{% url 'main:create_product' %}" class="block text-[#F0E6DA] hover:text-white font-medium py-3 transition-colors">
+                        Create Product
+                    </a>
                     </div>
+                    
+                    <!-- Mobile User Section -->
                     <div class="border-t border-gray-200 pt-4">
-                        <a href="{% url 'main:logout' %}" class="bg-[#75070C] text-[#F0E6DA] font-medium transition-colors px-4 py-2 rounded-md font-medium transition-colors  hover:text-white">
-                        <b>Logout</b>
+                    {% if user.is_authenticated %}
+                        <div class="mb-4">
+                        <div class="font-medium text-[#CBB4AB]">{{ user_username|default:user.username }}</div>
+                        <div class="text-sm text-[#F0E6DA]">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
+                        </div>
+                        <div class="border-t border-gray-200 pt-4">
+                            <a href="{% url 'main:logout' %}" class="bg-[#75070C] text-[#F0E6DA] font-medium transition-colors px-4 py-2 rounded-md font-medium transition-colors  hover:text-white">
+                            <b>Logout</b>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="space-y-3">
+                        <a href="{% url 'main:login' %}" class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
+                            Login
                         </a>
-                    </div>
-                {% else %}
-                    <div class="space-y-3">
-                    <a href="{% url 'main:login' %}" class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
-                        Login
-                    </a>
-                    <a href="{% url 'main:register' %}" class="block bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 px-4 rounded text-center transition-colors">
-                        Register
-                    </a>
-                    </div>
-                {% endif %}
+                        <a href="{% url 'main:register' %}" class="block bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 px-4 rounded text-center transition-colors">
+                            Register
+                        </a>
+                        </div>
+                    {% endif %}
                 </div>
             ```
         - untuk menampilkan hamburger:
