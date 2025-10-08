@@ -1,8 +1,12 @@
-# Footsal. 
+# Footsal. ⚽️
+
+Nama: Nadia Aisyah Fazila
+NPM: 2406495584
+Kelas: PBP-C
 
 Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
-## Tugas 2
+## Tugas 2 👩‍💻
 1. **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step.**
     - **Membuat sebuah proyek Django baru.**
         Saya membuat direktori baru dengan nama `footsal` dan membuat virtual environment di dalamnya. 
@@ -59,7 +63,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
     [https://drive.google.com/file/d/1UQ18nhBw_0oZUQK0yE4ySzssOUmez2H8/view?usp=sharing]
 
 3. **Jelaskan peran settings.py dalam proyek Django!**
-    - untuk mengontrol konfigurasi keseluruhan proyek Django yang sesuai dengan kebutuhan, contoh:
+    - Untuk mengontrol konfigurasi keseluruhan proyek Django yang sesuai dengan kebutuhan, contoh:
     `DATABASE` = untuk konfigurasi database dari proyek Django
     `ALLOWED_HOST` = daftar host yang diizinkan untuk mengakses proyek Django
     `INSTALLED_APPS` = daftar aplikasi yang dapat diakses pada proyek Django  
@@ -70,14 +74,14 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
     - setiap melakukan perubahan pada `models.py` harus melakukan migrasi untuk merefleksikan perubahan tersebut.  
 
 5. **Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?**
-    - karena framework Django menggunakan bahasa python yang sintaksnya lebih simple dan mudah dipahami
-    - karena framework Django adalah fullstack yang lengkap, sehingga memudahkan untuk fokus building the app tanpa harus melakukan banyak konfigurasi tambahan, karena fitur-fitur penting sudah tersedia secara built in.
-    - karena Django bisa dijadikan backend yang dapat dihubungkan ke aplikasi mobile. Jadi pembuatan aplikasi yang sama pada platform yang berbeda akan menjadi lebih cepat dan sederhana. 
+    - Karena framework Django menggunakan bahasa python yang sintaksnya lebih simple dan mudah dipahami
+    - Karena framework Django adalah fullstack yang lengkap, sehingga memudahkan untuk fokus building the app tanpa harus melakukan banyak konfigurasi tambahan, karena fitur-fitur penting sudah tersedia secara built in.
+    - Karena Django bisa dijadikan backend yang dapat dihubungkan ke aplikasi mobile. Jadi pembuatan aplikasi yang sama pada platform yang berbeda akan menjadi lebih cepat dan sederhana. 
 
 6. **Apakah ada feedback untuk asisten dosen tutorial 1 yang telah kamu kerjakan sebelumnya?**
-    - tidak ada feedback karena para asdos membantu dengan baik pada sesi tutorial.
+    - Tidak ada feedback karena para asdos membantu dengan baik pada sesi tutorial.
 
-## Tugas 3
+## Tugas 3 👩‍💻
 1. **Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?**
     Kita memerlukan data delivery dalam pengimplementasian sebuah platform supaya dapat mengirimkan data dari suatu stack ke stack lainnya dengan aman dan cepat, selain itu data delivery juga dapat membantu supaya tidak terjadi bottleneck ketika traffic sedang tinggi, dan untuk membantu menjaga konsistesi pada data.
 
@@ -177,7 +181,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
     {% endblock %}
     ```
-    pada kode diatas, `{{ form.as_table }}` adalah template tag yang digunakan untuk menampilkan fields form yang sudah di buat di `forms.py` sebagai table. Setelah itu saya melakukan routing untuk URLnya dengan menambahkan `path('create-product/', create_product, name='create_product'),` di `urlpatterns` pada `urls.py` 
+    Pada kode diatas, `{{ form.as_table }}` adalah template tag yang digunakan untuk menampilkan fields form yang sudah di buat di `forms.py` sebagai table. Setelah itu saya melakukan routing untuk URLnya dengan menambahkan `path('create-product/', create_product, name='create_product'),` di `urlpatterns` pada `urls.py` 
     Kemudian saya menambahkan kode `CSRF_TRUSTED_ORIGINS = [
     "<https://nadia-aisyah-footsal.pbp.cs.ui.ac.id>"]` di `settings.py` 
 
@@ -200,15 +204,15 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
         {% endblock content %}
         ```
-        pada kode diatas, saya membuat tampilannya menjadi menampilkan detail tentang product dengan urutan thumbnail-name-brand-description-price (saya tidak menampilkan `category` dan `is_featured` karena saya ingin `category` dan `is_featured` hanya terlihat di main saja). Setelah itu saya melakukan routing untuk URLnya dengan menambahkan `path('product/<str:id>/', show_product, name='show_product'),` di `urlpatterns` pada `urls.py` 
+        Pada kode diatas, saya membuat tampilannya menjadi menampilkan detail tentang product dengan urutan thumbnail-name-brand-description-price (saya tidak menampilkan `category` dan `is_featured` karena saya ingin `category` dan `is_featured` hanya terlihat di main saja). Setelah itu saya melakukan routing untuk URLnya dengan menambahkan `path('product/<str:id>/', show_product, name='show_product'),` di `urlpatterns` pada `urls.py` 
 
 6. **Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?**
-    - tidak ada feedback karena para asdos membantu dengan baik pada sesi tutorial 2.
+    - Tidak ada feedback karena para asdos membantu dengan baik pada sesi tutorial 2.
 
 7.  **Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.**
     [https://drive.google.com/drive/folders/181KisZUXfCjDLfV0Zjzih9475pZjotzt?usp=share_link]
 
-## Tugas 4
+## Tugas 4 👩‍💻
 1.  **Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.**
 - Django AuthenticationForm adalah form bawaan dari Django yang digunakan untuk melakuakan login yaitu untuk melakukan verifikasi username dan password, dan memanggil mekanisme autentikasi Django.
 - Kelebihan: 
@@ -226,55 +230,55 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
 3. **Apa saja kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web?**
     - **session:**
-        - kelebihan:
+        - Kelebihan:
             - data disimpan di server sehingga lebih aman untuk data yang sensitif
             - bertahan selama sesi masih aktif
             - mendukung proses transaksi 
-        - kekurangan:
+        - Kekurangan:
             - session habis ketika browser ditutup
     - **cookies**
-        - kelebihan:
+        - Kelebihan:
             - cookie tetap bertahan meskipun browser sudah ditutup
-        - kekurangan:
+        - Kekurangan:
             - lebih tidak aman dari session karena data di save di client
             - ada isu privasi karena tracking data user
             - menjadi celah keamanan pada website
-    - sebaiknya menggunakan session untuk data sensitif dan cookie untuk data non-sensitif 
+    - Sebaiknya menggunakan session untuk data sensitif dan cookie untuk data non-sensitif 
 
 4. **Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai? Bagaimana Django menangani hal tersebut?**
-    - tidak sepenuhnya aman secara default karena ada risiko pencurian cookies.
-    - cara Django menangani:
-        - dengan menyimpan data di server, jadi ketika penyerang mencuri cookie user nama hanya mendapatkan session id bukan isi data. session id yang dihasilkan oleh Django juga acak dan susah ditebak.
-        - dengan CSRF token dari Django yang aktif secara default sebagai pencegahan terhadap situs berbahaya dan penyerang.
-        - dengan *user authentication* dimana Django selali mengganti secret key setiap user login untuk perlindungan tambahan terhadap serangan pada CSRF.
+    - Tidak sepenuhnya aman secara default karena ada risiko pencurian cookies.
+    - Cara Django menangani:
+        - Dengan menyimpan data di server, jadi ketika penyerang mencuri cookie user nama hanya mendapatkan session id bukan isi data. session id yang dihasilkan oleh Django juga acak dan susah ditebak.
+        - Dengan CSRF token dari Django yang aktif secara default sebagai pencegahan terhadap situs berbahaya dan penyerang.
+        - Dengan *user authentication* dimana Django selali mengganti secret key setiap user login untuk perlindungan tambahan terhadap serangan pada CSRF.
 
 5. **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).**
     -  **Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna mengakses aplikasi sebelumnya sesuai dengan status login/logoutnya.**
-        - fungsi registrasi:
+        - Fungsi registrasi:
             dengan membuat function register() pada `views.py` untuk menghasilkan form registrasi secara otomatis. Kemudian membuat registration page `register.html`, selanjutnya melakukan routing di urls.py
-        - fungsi login:
+        - Fungsi login:
              dengan membuat function login_user() pada `views.py` untuk menghasilkan form login secara otomatis. Kemudian membuat login page `login.html`, selanjutnya melakukan routing di urls.py
-        - fungsi logout:
+        - Fungsi logout:
             dengan membuat function logout_user() pada `views.py` kemudian menambahkan hyperlink di `main.html` untuk logout, dan melakukan routing di `urls.py`
-        - memungkinkan pengguna untuk mengakses aplikasi dengan status login dan logoutnya:
+        - Memungkinkan pengguna untuk mengakses aplikasi dengan status login dan logoutnya:
             dengan menambahkan decorator `@login_required(login_url='/login')` untuk functions yang dapat diakses ketika pengguna sudah login, yaitu pada function `show_main()`, `create_product()` dan `show_product()` di `views.py`
 
     - **Membuat dua (2) akun pengguna dengan masing-masing tiga (3) dummy data menggunakan model yang telah dibuat sebelumnya untuk setiap akun di lokal.**
     [https://drive.google.com/file/d/1kKpEZXBc0-ETiZNHQ-Oy_ZvD5U3lXR3g/view?usp=sharing]
 
     - **Menghubungkan model Product dengan User.**
-        dengan menambahkan `user = models.ForeignKey(User, on_delete=models.CASCADE, null=True` pada model Product yang sudah dibuat, kemudian melakukan migrate, dan menambahkan potongan code ini di `views.py` 
-        - pada `create_product()`
+        Dengan menambahkan `user = models.ForeignKey(User, on_delete=models.CASCADE, null=True` pada model Product yang sudah dibuat, kemudian melakukan migrate, dan menambahkan potongan code ini di `views.py` 
+        - Pada `create_product()`
             ```
             news_entry = form.save(commit = False)
             news_entry.user = request.user
             ```
-        - pada `show_main()`
+        - Pada `show_main()`
             menambahkan filtering dengan default all dan product_list untuk product per user
-        kemudian, saya menambahkan button filter all products dan my products pada `main.html` selanjutnya saya menambahkan penampilan nama dari seller di `product_detail.html`
+        Kemudian, saya menambahkan button filter all products dan my products pada `main.html` selanjutnya saya menambahkan penampilan nama dari seller di `product_detail.html`
 
     - **Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last_login pada halaman utama aplikasi.**
-        - dengan menambahkan kode pada function `login_user()` untuk menyimpan cookie baru yang bernama last_login yang isinya adalah timestamp terakhir user melakukan login dan mengubah `form.is_valid()` pada `login_user()` di `views.py` menajadi:
+        - Dengan menambahkan kode pada function `login_user()` untuk menyimpan cookie baru yang bernama last_login yang isinya adalah timestamp terakhir user melakukan login dan mengubah `form.is_valid()` pada `login_user()` di `views.py` menajadi:
             ```
             if form.is_valid():
                 user = form.get_user()
@@ -283,9 +287,9 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
                 response.set_cookie('last_login', str(datetime.datetime.now()))
                 return response
             ```
-        kemudian juga menambahkan `'user_username': request.user.username,` dan`'last_login': request.COOKIES.get('last_login', 'Never')` pada function `show_main()` di `views.py`. tambahan kode tersebut untuk menampilkan user yang sedang aktif dan terakhir kali user melakukan login. Selanjutnya, saya menambahkan kode ` response.delete_cookie('last_login')` pada logout_user() di `views.py` untuk menghapus cookie setelah logout.
+        Kemudian juga menambahkan `'user_username': request.user.username,` dan`'last_login': request.COOKIES.get('last_login', 'Never')` pada function `show_main()` di `views.py`. tambahan kode tersebut untuk menampilkan user yang sedang aktif dan terakhir kali user melakukan login. Selanjutnya, saya menambahkan kode ` response.delete_cookie('last_login')` pada logout_user() di `views.py` untuk menghapus cookie setelah logout.
 
-## Tugas 5
+## Tugas 5 👩‍💻
 1. **Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!**
     - Mulai dari prioritas tertinggi:
         - Prioritas 1: inline styles. Contoh: `<p style="color:pink;">`
@@ -332,7 +336,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
 5. **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!**
     - **Implementasikan fungsi untuk menghapus dan mengedit product.**
-        dengan membuat dua fungsi berikut pada `views.py` 
+        Dengan membuat dua fungsi berikut pada `views.py` 
         ```
         def edit_product(request, id):
             product = get_object_or_404(Product, pk=id)
@@ -371,7 +375,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
 
         - **Kustomisasi halaman daftar product menjadi lebih menarik dan responsive. Kemudian, perhatikan kondisi berikut:**
             - **Jika pada aplikasi belum ada product yang tersimpan, halaman daftar product akan menampilkan gambar dan pesan bahwa belum ada product yang terdaftar.**
-                dengan menambahkan `no-product.png` di direktori `static/image` potongan code berikut pada main:
+                Dengan menambahkan `no-product.png` di direktori `static/image` potongan code berikut pada main:
                 ```
                 ...
                 {% if not product_list %}
@@ -388,10 +392,10 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
                 ...
                 ```
             - **Jika sudah ada product yang tersimpan, halaman daftar product akan menampilkan detail setiap product dengan menggunakan card (tidak boleh sama persis dengan desain pada Tutorial!).**
-                - dengan membuat file `card_product.html` di direktori `main/templates ` kemudian melakukan styling pada card di file tersebut. Design saya: [https://drive.google.com/drive/folders/1uBxHVdLwX544zmJ806-afdc2f-tVbDeC?usp=share_link]
+                - Dengan membuat file `card_product.html` di direktori `main/templates ` kemudian melakukan styling pada card di file tersebut. Design saya: [https://drive.google.com/drive/folders/1uBxHVdLwX544zmJ806-afdc2f-tVbDeC?usp=share_link]
 
         - **Untuk setiap card product, buatlah dua buah button untuk mengedit dan menghapus product pada card tersebut!**
-            - dengan menambahkan potongan kode dibawah pada `card_product.html`
+            - Dengan menambahkan potongan kode dibawah pada `card_product.html`
             ```
             <!-- Action Buttons -->
             {% if user.is_authenticated and product.user == user %}
@@ -418,7 +422,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
             ```
         
         - **Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop.**
-            - dengan membuat file `navbar.html` pada direktori `main/templates` kemudian menautkan navbar tersebut ke `main.html` dengan `{% include 'navbar.html' %}` di dalam `{% block content %} ... {% endblock content%}`. Untuk membuat navbar tersebut jadi responsive maka mengatur dengan 
+            - Dengan membuat file `navbar.html` pada direktori `main/templates` kemudian menautkan navbar tersebut ke `main.html` dengan `{% include 'navbar.html' %}` di dalam `{% block content %} ... {% endblock content%}`. Untuk membuat navbar tersebut jadi responsive maka mengatur dengan 
             - untuk desktop:
                 ```
                 <!-- Desktop Navigation -->
@@ -454,7 +458,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
                 {% endif %}
                 </div>
                 ```
-            - untuk mobile:
+            - Untuk mobile:
                 ```
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
@@ -507,7 +511,7 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
                     {% endif %}
                 </div>
             ```
-        - untuk menampilkan hamburger:
+        - Untuk menampilkan hamburger:
             ```
             <script>
                 const btn = document.querySelector("button.mobile-menu-button");
@@ -521,3 +525,21 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
         - Perubahan yang saya lakukan pada navbar adalah menambahkan `My Products` yang menampilan product yang dibuat oleh user yang sedang login.
         - Tampilan navbar yang saya buat: [https://drive.google.com/drive/folders/1uBxHVdLwX544zmJ806-afdc2f-tVbDeC?usp=share_link]
 
+## Tugas 6 👩‍💻
+1. **Apa perbedaan antara synchronous request dan asynchronous request?**
+    - **Synchronous request**: Mencegah DOM untuk mengeksekusi kode selanjutnya hingga server memberikan response. User tidak dapat membuat request yang lain hinggga request sebelumnya diterima.
+    - **Asynchronous request**: Tidak mencegah DOM untuk mengeksekusi kode selanjutnya saat menunggu server memberikan response. DOM dapat mengeksekusi request secara bersamaan.
+
+2. **Bagaimana AJAX bekerja di Django (alur request–response)?**
+    - Ilustrasi alur: [https://drive.google.com/file/d/1OVLGjkAD8Km-gdCOYUuqa2qKE4ETU08l/view?usp=sharing]
+    - Penjelasan: Ketika user mengirimkan request pada halaman web, sebuah `XMLHttpRequest` object akan dibuat oleh JavaScript. Kemudian object tersebut akan mengirimkan request ke Django, dimana views.py pada Django akan memproses request tersebut, kemudian memproses data dan mengembalikan response kembali dalam bentuk JSON. Selanjutnya, response tersebut akan dibaca oleh JavaScript dan aksi berikutnya akan dipicu oleh JavaScript sesuai dengan kode yang dibuat.
+
+3. **Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?**
+    - Keuntungan menggunakan AJAX dibandingkan dengan render biasa pada Django adalah menawarkan user experience yang lebih baik dan membuat web lebih responsif dan cepat. Karena dengan menggunakan AJAX maka tidak perlu reload halaman setiap kali ada request seperti render biasa di Django.
+
+4. **Bagaimana cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django?**
+    - **Dengan menambahkan strip_tags**: Menghapus semua tag html dari input, sehingga data yang masuk ke database sudah bersih.
+    - **Dengan membersihkan data dengan DOMPurify**: Data berbahaya yang sudah ada di database akan dihapus secara otomatis.
+
+5. **Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website?**
+    - AJAX memungkinkan halaman web untuk memperbarui data secara asynchronous dengan mengirimkan data ke server di balik layar. Sehingga, user dapat memperbarui sebagian elemen pada halaman tanpa harus melakukan reload halaman secara keseluruhan. Dengan hal tersebut, user experience akan menjadi lebih cepat dan nyaman.
