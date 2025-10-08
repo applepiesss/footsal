@@ -134,6 +134,8 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+            messages.success(request, f'You have successfully logged in {user.username} ^__^!') 
+
             response = HttpResponseRedirect(reverse("main:show_main"))
             response.set_cookie('last_login', str(datetime.datetime.now()))
             return response
@@ -154,6 +156,7 @@ def edit_product(request, id):
     form = ProductForm(request.POST or None, instance=product)
     if form.is_valid() and request.method == 'POST':
         form.save()
+        messages.success(request, f'Product has been updated!')
         return redirect('main:show_main')
 
     context = {
@@ -165,6 +168,7 @@ def edit_product(request, id):
 def delete_product(request, id):
     product = get_object_or_404(Product, pk=id)
     product.delete()
+    messages.success(request, f'Product has been deleted!')
     return HttpResponseRedirect(reverse('main:show_main'))
 
 @csrf_exempt

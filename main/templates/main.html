@@ -174,7 +174,7 @@
         const editDeleteButtons = CURRENT_USER_ID && Number(CURRENT_USER_ID) === Number(productItem.user_id)
         ? `
         <div class="flex space-x-2">
-            <a href="${editLink}" class="text-[#4F6815] hover:text-white text-sm transition-colors">Edit</a>
+            <a href="${editLink}" class="text-[#4F6815] hover:text-white text-sm transition-colors" onclick="return confirm('Are you sure you want to edit this product?')">Edit</a>
             <a href="${deleteLink}" class="text-[#75070C] hover:text-white text-sm transition-colors" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a>
         </div>
         `
@@ -282,7 +282,7 @@
 
     // Refresh eventListener
     document.getElementById("refresh-btn").addEventListener("click", () => {
-        fetchProductFromServer(); // Ini doang, simple
+        fetchProductFromServer(); 
     });
 
     // Initialize page
@@ -301,5 +301,40 @@
         // Refresh data without page reload
         fetchProductFromServer();
 });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const djangoMessages = [
+            {% if messages %}
+                {% for message in messages %}
+                    {
+                        // tags: success, error, warning, info
+                        tags: "{{ message.tags }}",
+                        message: "{{ message|safe|escapejs }}" 
+                    },
+                {% endfor %}
+            {% endif %}
+        ];
+
+        // Loop dan Tampilkan setiap pesan sebagai Toast ---
+        djangoMessages.forEach(msg => {
+            let toastType = 'normal';
+            let toastTitle = msg.tags.charAt(0).toUpperCase() + msg.tags.slice(1);
+            let duration = 5000; // 5 detik
+
+            if (msg.tags.includes('success')) {
+                toastType = 'success';
+                if (msg.message.startsWith('Welcome,') || msg.message.startsWith('You have successfully logged in')) {
+                    toastTitle = 'Welcome';
+                } else {
+                    toastTitle = 'Success'; 
+                }
+            } else if (msg.tags.includes('error')) {
+                toastType = 'error';
+                toastTitle = 'Error';
+            }
+            
+            showToast(toastTitle, msg.message, toastType, duration);
+        });
+    });
 </script>
 {% endblock content %}

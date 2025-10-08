@@ -22,7 +22,7 @@ function showToast(title, message, type = 'normal', duration = 3000) {
     } else {
         toastComponent.classList.add('bg-white', 'border-gray-300', 'text-gray-800');
         toastComponent.style.border = '1px solid #d1d5db';
-    }
+    } 
 
     toastTitle.textContent = title;
     toastMessage.textContent = message;
