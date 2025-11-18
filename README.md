@@ -223,7 +223,6 @@ Tautan menuju Footsal. -> [https://nadia-aisyah-footsal.pbp.cs.ui.ac.id]
     - karena generic maka harus dikostumisasi sendiri sesuai kebutuhan yang bisa jadi merepotkan
     - sederhana, jadi kurang cocok jika butuh sistem otentikasi yang lebih kompleks
 
-
 2. **Apa perbedaan antara autentikasi dan otorisasi? Bagaiamana Django mengimplementasikan kedua konsep tersebut?**
     - **autentikasi:** memastikan siapa user 
     - **otorisasi:** menentukan apa yang boleh dilakukan dan diakses oleh user
