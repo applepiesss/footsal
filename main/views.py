@@ -229,23 +229,57 @@ def proxy_image(request):
 def create_product_flutter(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        title = strip_tags(data.get("title", ""))  # Strip HTML tags
-        content = strip_tags(data.get("content", ""))  # Strip HTML tags
+        name = strip_tags(data.get("name", ""))  # Strip HTML tags
+        price = strip_tags(data.get("price", ""))
+        description = strip_tags(data.get("description", ""))  # Strip HTML tags
         category = data.get("category", "")
         thumbnail = data.get("thumbnail", "")
         is_featured = data.get("is_featured", False)
+        brand = strip_tags(data.get("brand", ""))
+        discount = strip_tags(data.get("discount", ""))
+        stock = strip_tags(data.get("stock", ""))
         user = request.user
         
         new_product = Product(
-            title=title, 
-            content=content,
-            category=category,
-            thumbnail=thumbnail,
-            is_featured=is_featured,
-            user=user
+            name = name,
+            price = price,
+            description = description,
+            thumbnail = thumbnail,
+            category = category,
+            is_featured = is_featured,
+            brand = brand,
+            discount = discount,
+            stock = stock, 
+            user = user
         )
         new_product.save()
         
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
+    
+@login_required(login_url='/login')
+def show_json_my_products(request):
+    # Filter produk yang hanya dimiliki oleh pengguna yang sedang login
+    # 'request.user' secara otomatis tersedia karena adanya @login_required
+    product_list = Product.objects.filter(user=request.user)
+    
+    # Serialisasi data produk ke format yang sama dengan show_json
+    data = [
+        {
+            'id': product.pk, 
+            'user_id': product.user.pk,
+            'name': product.name,
+            'price':  product.price,
+            'description': product.description,
+            'thumbnail': product.thumbnail,
+            'category': product.category,
+            'is_featured': product.is_featured,
+            'brand': product.brand,
+            'discount': product.discount,
+            'stock': product.stock,
+        }
+        for product in product_list
+    ]
+
+    return JsonResponse(data, safe=False)
